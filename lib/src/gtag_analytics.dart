@@ -57,6 +57,11 @@ class GoogleAnalytics {
   void sendSignUp({String method: 'N/A'}) {
     _sendEvent('sign_up', new Options(method: method));
   }
+  
+  /// expose _sendEvent
+  void sendEvent(String eventName, Options options) {
+    _sendEvent(eventName, options);
+  }
 
   /// The method doing the actual sending. Catches and discards the error
   /// that stems from the `gtag` JavaScript function being undefined.
