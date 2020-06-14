@@ -14,6 +14,7 @@ class Options {
   external factory Options(
       {String event_category,
       String event_label,
+      String screen_name,
       int value,
       String method,
       String description,
