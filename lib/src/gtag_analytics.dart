@@ -25,6 +25,11 @@ class GoogleAnalytics {
   /// [failSilently].
   GoogleAnalytics({this.failSilently: false});
 
+  /// config Analytics with measurementId
+  void config(String measurementId) {
+    gtag('config', measurementId, new Options());
+  }
+
   /// Send a custom event.
   void sendCustom(String name, {String category, String label, int value}) {
     final options = new Options();

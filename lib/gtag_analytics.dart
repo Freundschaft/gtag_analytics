@@ -5,3 +5,4 @@
 library gtag_analytics;
 
 export 'src/gtag_analytics.dart' show GoogleAnalytics;
+export 'src/interop.dart' show Options;
