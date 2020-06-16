@@ -36,7 +36,7 @@ class GoogleAnalytics {
   /// setter for measurementId, runs gtag(config) when set
   set measurementId(String newMeasurementId) {
     if (newMeasurementId != null) {
-      gtag('config', _measurementId, new Options());
+      gtag('config', _measurementId, new Options(send_page_view: false));
       _measurementId = newMeasurementId;
     } else {
       throw Exception('supplied measurementId is null');

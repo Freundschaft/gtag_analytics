@@ -15,6 +15,7 @@ class Options {
       {String event_category,
       String event_label,
       String screen_name,
+      bool send_page_view,
       int value,
       String method,
       String description,
