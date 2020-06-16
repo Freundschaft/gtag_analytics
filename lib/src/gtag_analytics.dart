@@ -8,6 +8,12 @@ import 'interop.dart';
 
 /// Class encapsulating the methods for sending data to Analytics.
 class GoogleAnalytics {
+  /// Create a new instance for tracking through Google Analytics, and set
+  /// [failSilently] and [measurementId] if it was provided.
+  GoogleAnalytics({String measurementId, this.failSilently: false}) {
+    this.measurementId = measurementId;
+  }
+
   static const String _event = 'event';
 
   static final Options _empty = new Options();
@@ -21,13 +27,20 @@ class GoogleAnalytics {
   /// when Analytics is unavailable.
   final bool failSilently;
 
-  /// Create a new instance for tracking through Google Analytics, and set
-  /// [failSilently].
-  GoogleAnalytics({this.failSilently: false});
+  /// the measurement ID of the analytics property
+  String _measurementId;
 
-  /// config Analytics with measurementId
-  void config(String measurementId) {
-    gtag('config', measurementId, new Options());
+  /// default getter for measurementId
+  String get measurementId => _measurementId;
+
+  /// setter for measurementId, runs gtag(config) when set
+  set measurementId(String newMeasurementId) {
+    if (newMeasurementId != null) {
+      gtag('config', _measurementId, new Options());
+      _measurementId = newMeasurementId;
+    } else {
+      throw Exception('supplied measurementId is null');
+    }
   }
 
   /// Send a custom event.
@@ -48,8 +61,7 @@ class GoogleAnalytics {
 
   /// Send an exception to Google Analytics.
   void sendException(String description, {@required bool fatal}) {
-    _sendEvent(
-        'exception', new Options(description: description, fatal: fatal));
+    _sendEvent('exception', new Options(description: description, fatal: fatal));
   }
 
   /// Send a page view.
@@ -62,7 +74,7 @@ class GoogleAnalytics {
   void sendSignUp({String method: 'N/A'}) {
     _sendEvent('sign_up', new Options(method: method));
   }
-  
+
   /// expose _sendEvent
   void sendEvent(String eventName, Options options) {
     _sendEvent(eventName, options);
