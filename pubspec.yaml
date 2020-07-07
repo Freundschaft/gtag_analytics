@@ -12,6 +12,10 @@ environment:
 dependencies:
   js: ^0.6.1
   meta: ^1.1.2
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
 
 dev_dependencies:
   test: '>=0.12.0 <2.0.0'
